@@ -8,11 +8,11 @@ export default function xhr(config: IAxiosRequestConfig): Promise<any> {
     if (timeout) {
       request.timeout = timeout
     }
-    Object.keys(headers).forEach(header => {
-      if (data === null && header.toLowerCase() === 'content-type') {
-        headers[header] = undefined
+    Object.keys(headers).forEach(name => {
+      if (data === null && name.toLowerCase() === 'content-type') {
+        headers[name] = undefined
       }
-      request.setRequestHeader(header, header[headers])
+      request.setRequestHeader(name, headers[name])
     })
     request.send(data)
 

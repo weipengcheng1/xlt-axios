@@ -14,16 +14,18 @@ export  type TMethod =
   | 'patch'
   | 'PATCH'
 
+export interface Headers {
+  [key: string]: any
+}
+
 export interface IAxiosRequestConfig {
   url: string;
   method?: TMethod;
   data?: any;
   params?: any;
-  headers?: any,
+  headers?: Headers | any,
   responseType?: any,
   timeout?: number
 }
 
-export interface Headers {
-  [key: string]: any
-}
+
