@@ -1,5 +1,4 @@
 import { IAxiosRequestConfig } from './types'
-import { buildURL } from './helps/url'
 
 export default function xhr(config: IAxiosRequestConfig): Promise<any> {
   return new Promise((resolve, reject) => {
@@ -9,10 +8,12 @@ export default function xhr(config: IAxiosRequestConfig): Promise<any> {
     if (timeout) {
       request.timeout = timeout
     }
-    if (['post', 'POST'].includes(method)) {
-      request.setRequestHeader('Content-Type', 'application/json')
-    }
-
+    Object.keys(headers).forEach(header => {
+      if (data === null && header.toLowerCase() === 'content-type') {
+        headers[header] = undefined
+      }
+      request.setRequestHeader(header, header[headers])
+    })
     request.send(data)
 
     request.onload = (res: ProgressEvent<EventTarget>) => {
@@ -24,3 +25,4 @@ export default function xhr(config: IAxiosRequestConfig): Promise<any> {
     }
   })
 }
+

@@ -1,7 +1,5 @@
 // 构建url
-import { isDate, isObject } from './utils'
-import { config } from 'shelljs'
-import { IAxiosRequestConfig } from '../types'
+import { isDate, isPlainObject } from './utils'
 
 export const buildURL = (url: string, params?: any): string => {
   console.log(params)
@@ -25,7 +23,7 @@ export const buildURL = (url: string, params?: any): string => {
     values.forEach(vKey => {
       if (isDate(vKey)) {
         vKey = vKey.toISOString()
-      } else if (isObject(vKey)) {
+      } else if (isPlainObject(vKey)) {
         vKey = JSON.stringify(vKey)
       }
       parts.push(`${encode(key)}=${encode(vKey)}`)
@@ -53,11 +51,4 @@ const encode = (val: string): string => {
     .replace(/%5D/gi, ']')
 }
 
-export const processConfig = (config: IAxiosRequestConfig) => {
-  config.url = buildURL(config.url, config.params)
-}
 
-export const transformURL = (config: IAxiosRequestConfig) => {
-  config.url = buildURL(config.url, config.params)
-  return config
-}

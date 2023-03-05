@@ -23,3 +23,7 @@ export interface IAxiosRequestConfig {
   responseType?: any,
   timeout?: number
 }
+
+export interface Headers {
+  [key: string]: any
+}
