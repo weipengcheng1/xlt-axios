@@ -37,6 +37,15 @@ router.post('/simple/get1', function(req, res) {
   })
 })
 
+router.post('/simple/get2', function(req, res) {
+  setTimeout(() => {
+    res.json({
+      ...req.body
+    })
+  }, 3000)
+})
+
+
 app.use(router)
 
 
